@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.deleteInvoiceById = exports.updateInvoiceById = exports.getInvoiceById = exports.getInvoices = exports.createInvoice = void 0;
+exports.deleteInvoiceById = exports.updateInvoiceById = exports.getInvoiceByCodigo = exports.getInvoiceById = exports.getInvoices = exports.createInvoice = void 0;
 
 var _Invoice = _interopRequireDefault(require("../models/Invoice"));
 
@@ -120,23 +120,24 @@ var getInvoiceById = /*#__PURE__*/function () {
 
 exports.getInvoiceById = getInvoiceById;
 
-var updateInvoiceById = /*#__PURE__*/function () {
+var getInvoiceByCodigo = /*#__PURE__*/function () {
   var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(req, res) {
-    var updateInvoice;
+    var invoice;
     return regeneratorRuntime.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
             _context4.next = 2;
-            return _Invoice["default"].findByIdAndUpdate(req.params.invoiceId, req.body, {
-              "new": true
-            });
+            return _Invoice["default"].find({
+              codigo: req.params.invoiceId
+            }).exec();
 
           case 2:
-            updateInvoice = _context4.sent;
-            res.status(200).json(updateInvoice);
+            invoice = _context4.sent;
+            console.log(invoice);
+            res.status(200).json(invoice);
 
-          case 4:
+          case 5:
           case "end":
             return _context4.stop();
         }
@@ -144,26 +145,28 @@ var updateInvoiceById = /*#__PURE__*/function () {
     }, _callee4);
   }));
 
-  return function updateInvoiceById(_x7, _x8) {
+  return function getInvoiceByCodigo(_x7, _x8) {
     return _ref4.apply(this, arguments);
   };
 }();
 
-exports.updateInvoiceById = updateInvoiceById;
+exports.getInvoiceByCodigo = getInvoiceByCodigo;
 
-var deleteInvoiceById = /*#__PURE__*/function () {
+var updateInvoiceById = /*#__PURE__*/function () {
   var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(req, res) {
-    var invoiceId;
+    var updateInvoice;
     return regeneratorRuntime.wrap(function _callee5$(_context5) {
       while (1) {
         switch (_context5.prev = _context5.next) {
           case 0:
-            invoiceId = req.params.invoiceId;
-            _context5.next = 3;
-            return _Invoice["default"].findByIdAndDelete(invoiceId);
+            _context5.next = 2;
+            return _Invoice["default"].findByIdAndUpdate(req.params.invoiceId, req.body, {
+              "new": true
+            });
 
-          case 3:
-            res.status(204).json();
+          case 2:
+            updateInvoice = _context5.sent;
+            res.status(200).json(updateInvoice);
 
           case 4:
           case "end":
@@ -173,8 +176,37 @@ var deleteInvoiceById = /*#__PURE__*/function () {
     }, _callee5);
   }));
 
-  return function deleteInvoiceById(_x9, _x10) {
+  return function updateInvoiceById(_x9, _x10) {
     return _ref5.apply(this, arguments);
+  };
+}();
+
+exports.updateInvoiceById = updateInvoiceById;
+
+var deleteInvoiceById = /*#__PURE__*/function () {
+  var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(req, res) {
+    var invoiceId;
+    return regeneratorRuntime.wrap(function _callee6$(_context6) {
+      while (1) {
+        switch (_context6.prev = _context6.next) {
+          case 0:
+            invoiceId = req.params.invoiceId;
+            _context6.next = 3;
+            return _Invoice["default"].findByIdAndDelete(invoiceId);
+
+          case 3:
+            res.status(204).json();
+
+          case 4:
+          case "end":
+            return _context6.stop();
+        }
+      }
+    }, _callee6);
+  }));
+
+  return function deleteInvoiceById(_x11, _x12) {
+    return _ref6.apply(this, arguments);
   };
 }();
 

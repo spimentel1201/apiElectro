@@ -20,7 +20,8 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 var router = (0, _express.Router)();
 router.post('/', [_middlewares.authJwt.verifyToken, _middlewares.authJwt.isWorker], invoicesCtrl.createInvoice);
 router.get('/', invoicesCtrl.getInvoices);
-router.get('/:inoviceId', invoicesCtrl.getInvoiceById);
+router.get('/:invoiceId', invoicesCtrl.getInvoiceById);
+router.get('/code/:invoiceId', invoicesCtrl.getInvoiceByCodigo);
 router.put('/:invoiceId', [_middlewares.authJwt.verifyToken, _middlewares.authJwt.isWorker], _middlewares.authJwt.verifyToken, invoicesCtrl.updateInvoiceById);
 router["delete"]('/:invoiceId', [_middlewares.authJwt.verifyToken, _middlewares.authJwt.isWorker], invoicesCtrl.deleteInvoiceById);
 var _default = router;
