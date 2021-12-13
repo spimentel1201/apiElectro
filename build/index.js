@@ -6,6 +6,9 @@ require("./database");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-_app["default"].listen(process.env.ROOT || 5000);
+var host = '0.0.0.0';
+var port = process.env.PORT || 5000;
+
+_app["default"].listen(port, host);
 
 console.log("Server listen on port", 5000);
